@@ -1,0 +1,89 @@
+:root {
+  /* Brand colors */
+  --color-navy: #060E18;
+  --color-navy-800: #0A1626;
+  --color-navy-700: #102036;
+  --color-navy-600: #1A2F4A;
+  --color-gold: #C5A869;
+  --color-gold-600: #B79A61;
+  --color-gold-300: #E0D2B0;
+
+  /* Text */
+  --color-text: #1F2937;
+  --color-text-secondary: #6B7280;
+  --color-text-light: #9CA3AF;
+  --color-text-inverse: #F8FAFC;
+  --color-text-inverse-secondary: #B0BEC5;
+
+  /* Surfaces */
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-subtle: #EDF2F7;
+  --color-border-navy: rgba(255, 255, 255, 0.12);
+
+  /* Semantic */
+  --color-success: #15803D;
+  --color-error: #B91C1C;
+  --color-warning: #B45309;
+  --color-focus: #C5A869;
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: clamp(1.75rem, 4vw, 2.25rem);
+  --fs-4xl: clamp(2rem, 5vw, 3rem);
+  --fs-5xl: clamp(2.5rem, 6vw, 3.75rem);
+
+  /* Spacing — 8px system */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-narrow: 880px;
+  --container-padding: 1.5rem;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(6, 14, 24, 0.06);
+  --shadow-md: 0 4px 12px rgba(6, 14, 24, 0.08);
+  --shadow-lg: 0 12px 32px rgba(6, 14, 24, 0.12);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Z-index */
+  --z-header: 100;
+  --z-mobile-menu: 200;
+  --z-overlay: 300;
+
+  /* Line heights */
+  --lh-heading: 1.2;
+  --lh-body: 1.6;
+}
