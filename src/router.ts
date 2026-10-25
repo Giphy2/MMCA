@@ -9,6 +9,15 @@ export interface Route {
 
 const routes: Route[] = [];
 
+const BASE: string = import.meta.env.BASE_URL ?? '/';
+
+function stripBase(pathname: string): string {
+  if (BASE && BASE !== '/' && pathname.startsWith(BASE)) {
+    return pathname.slice(BASE.length - 1) || '/';
+  }
+  return pathname || '/';
+}
+
 export function addRoute(
   path: string,
   render: Route['render'],
@@ -25,8 +34,9 @@ export function addRoute(
 }
 
 export function matchRoute(pathname: string): Route | null {
+  const cleanPath = stripBase(pathname);
   for (const route of routes) {
-    const match = route.pattern.exec(pathname);
+    const match = route.pattern.exec(cleanPath);
     if (match) {
       const params: Record<string, string> = {};
       route.paramNames.forEach((name, i) => {
@@ -44,10 +54,11 @@ export function getMatchedParams(route: Route): Record<string, string> {
 }
 
 export function navigate(path: string): void {
-  window.history.pushState({}, '', path);
+  const fullPath = `${BASE.replace(/\/$/, '')}${path}`;
+  window.history.pushState({}, '', fullPath);
   window.dispatchEvent(new PopStateEvent('popstate'));
 }
 
 export function getCurrentPath(): string {
-  return window.location.pathname || '/';
+  return stripBase(window.location.pathname || '/');
 }
