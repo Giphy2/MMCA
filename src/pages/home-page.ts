@@ -9,7 +9,7 @@ import '../components/service-card';
 import { renderIcon } from '../components/icon';
 
 const HERO_IMAGE =
-  './public/hero1.jpg';
+  '/hero1.jpg';
 const ABOUT_IMAGE =
   'https://images.pexels.com/photos/7876088/pexels-photo-7876088.jpeg?auto=compress&cs=tinysrgb&h=650&w=940';
 
