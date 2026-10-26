@@ -8,10 +8,7 @@ import '../components/section-heading';
 import '../components/service-card';
 import { renderIcon } from '../components/icon';
 
-const HERO_IMAGE =
-  '/hero1.jpg';
-const ABOUT_IMAGE =
-  'https://images.pexels.com/photos/7876088/pexels-photo-7876088.jpeg?auto=compress&cs=tinysrgb&h=650&w=940';
+const HERO_IMAGE = '/hero1.jpg';
 
 @customElement('home-page')
 export class HomePage extends LitElement {
@@ -20,32 +17,67 @@ export class HomePage extends LitElement {
       display: block;
     }
 
-    /* Hero */
+    /* Hero — full-width background image with dark overlay */
     .hero {
-      background: var(--color-navy);
-      color: var(--color-text-inverse);
-      padding: var(--space-24) 0;
       position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      color: var(--color-text-inverse);
       overflow: hidden;
     }
 
-    .hero-inner {
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(6, 14, 24, 0.85) 0%,
+        rgba(6, 14, 24, 0.72) 40%,
+        rgba(6, 14, 24, 0.55) 70%,
+        rgba(6, 14, 24, 0.4) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
       max-width: var(--container-max);
       margin: 0 auto;
-      padding: 0 var(--container-padding);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: center;
+      padding: var(--space-20) var(--container-padding);
+      width: 100%;
+    }
+
+    .hero-inner {
+      max-width: 640px;
     }
 
     .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
       font-size: var(--fs-xs);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--color-gold);
-      margin-bottom: var(--space-4);
+      margin-bottom: var(--space-5);
       font-weight: 600;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--color-gold);
     }
 
     .hero h1 {
@@ -53,6 +85,7 @@ export class HomePage extends LitElement {
       color: var(--color-text-inverse);
       margin-bottom: var(--space-6);
       line-height: 1.1;
+      font-weight: 600;
     }
 
     .hero-text {
@@ -60,7 +93,7 @@ export class HomePage extends LitElement {
       color: var(--color-text-inverse-secondary);
       line-height: var(--lh-body);
       margin-bottom: var(--space-8);
-      max-width: 520px;
+      max-width: 540px;
     }
 
     .hero-cta-group {
@@ -98,7 +131,7 @@ export class HomePage extends LitElement {
       padding: var(--space-4) var(--space-8);
       border-radius: var(--radius-sm);
       text-decoration: none;
-      border: 1px solid var(--color-border-navy);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       transition: border-color var(--transition-fast), color var(--transition-fast);
     }
 
@@ -107,69 +140,77 @@ export class HomePage extends LitElement {
       color: var(--color-gold);
     }
 
-    .hero-image {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--color-border-navy);
+    /* MMCA Intro Section */
+    .mmca-intro {
+      padding: var(--space-20) 0;
+      background: var(--color-surface);
     }
 
-    /* Intro */
-    .intro {
-      padding: var(--space-24) 0;
-    }
-
-    .intro-inner {
-      max-width: var(--container-max);
+    .mmca-inner {
+      max-width: var(--container-narrow);
       margin: 0 auto;
       padding: 0 var(--container-padding);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-16);
-      align-items: center;
+      text-align: center;
     }
 
-    .intro-image {
-      width: 100%;
-      aspect-ratio: 5 / 4;
-      object-fit: cover;
-      border-radius: var(--radius-md);
-    }
-
-    .intro-content h2 {
-      margin-bottom: var(--space-6);
-    }
-
-    .intro-content p {
-      color: var(--color-text-secondary);
+    .mmca-inner .eyebrow {
+      display: inline-block;
+      font-size: var(--fs-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-gold-600);
       margin-bottom: var(--space-4);
     }
 
-    .intro-locations {
-      display: flex;
-      gap: var(--space-6);
-      margin-top: var(--space-6);
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--color-border);
+    .mmca-inner h2 {
+      font-size: var(--fs-4xl);
+      color: var(--color-navy);
+      margin-bottom: var(--space-6);
     }
 
-    .location-item {
-      display: flex;
+    .mmca-inner p {
+      color: var(--color-text-secondary);
+      font-size: var(--fs-lg);
+      line-height: 1.7;
+      margin-bottom: var(--space-5);
+      text-align: left;
+    }
+
+    .mmca-inner p:last-of-type {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .read-more-btn {
+      display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-size: var(--fs-sm);
-      color: var(--color-text);
-      font-weight: 500;
+      margin-top: var(--space-4);
+      color: var(--color-gold-600);
+      font-weight: 600;
+      font-size: var(--fs-base);
+      text-decoration: none;
+      transition: color var(--transition-fast);
     }
 
-    .location-item svg {
-      color: var(--color-gold-600);
+    .read-more-btn:hover {
+      color: var(--color-navy);
+    }
+
+    .read-more-btn svg {
+      transition: transform var(--transition-fast);
+    }
+
+    .read-more-btn:hover svg {
+      transform: translateX(4px);
     }
 
     /* Practice Areas */
     .practice-section {
-      background: var(--color-surface);
+      background: var(--color-bg);
       padding: var(--space-24) 0;
     }
 
@@ -185,6 +226,7 @@ export class HomePage extends LitElement {
     /* Why Choose */
     .why-section {
       padding: var(--space-24) 0;
+      background: var(--color-surface);
     }
 
     .why-grid {
@@ -192,7 +234,7 @@ export class HomePage extends LitElement {
       margin: 0 auto;
       padding: 0 var(--container-padding);
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-8);
     }
 
@@ -213,7 +255,7 @@ export class HomePage extends LitElement {
     }
 
     .why-card h3 {
-      font-size: var(--fs-xl);
+      font-size: var(--fs-lg);
       margin-bottom: var(--space-3);
     }
 
@@ -248,7 +290,7 @@ export class HomePage extends LitElement {
 
     /* Insights */
     .insights-section {
-      background: var(--color-surface);
+      background: var(--color-bg);
       padding: var(--space-24) 0;
     }
 
@@ -264,7 +306,7 @@ export class HomePage extends LitElement {
     .insight-card {
       display: flex;
       flex-direction: column;
-      background: var(--color-bg);
+      background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       padding: var(--space-6);
@@ -371,18 +413,12 @@ export class HomePage extends LitElement {
     }
 
     @media (max-width: 1023px) {
-      .hero-inner,
-      .intro-inner {
-        grid-template-columns: 1fr;
-        gap: var(--space-12);
-      }
-
       .practice-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
       .why-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .insights-grid {
@@ -392,7 +428,19 @@ export class HomePage extends LitElement {
 
     @media (max-width: 767px) {
       .hero {
-        padding: var(--space-16) 0;
+        min-height: 500px;
+      }
+
+      .hero-content {
+        padding: var(--space-16) var(--container-padding);
+      }
+
+      .hero h1 {
+        font-size: var(--fs-4xl);
+      }
+
+      .hero-text {
+        font-size: var(--fs-base);
       }
 
       .practice-grid {
@@ -422,15 +470,18 @@ export class HomePage extends LitElement {
 
   render() {
     return html`
-      <!-- Hero -->
+      <!-- Hero with background image and overlay -->
       <section class="hero">
-        <div class="hero-inner">
-          <div>
+        <div class="hero-bg" style="background-image: url('${HERO_IMAGE}')"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-inner">
             <div class="hero-eyebrow">${firmInfo.credential}</div>
-            <h1>Legal counsel built on trust and diligence</h1>
+            <h1>Your Trusted Partner in Complex Legal Matters</h1>
             <p class="hero-text">
-              Mukele Moni Law provides professional legal services to individuals and
-              businesses across Kenya, with offices in Nairobi and Kakamega.
+              From individuals to multinational organizations, we provide personalized
+              strategies rooted in deep industry knowledge, modern legal research, and a
+              collaborative approach that ensures optimal outcomes.
             </p>
             <div class="hero-cta-group">
               <a class="btn-primary" href="/contact" @click=${(e: Event) => this.go(e, '/contact')}>
@@ -445,60 +496,46 @@ export class HomePage extends LitElement {
               </a>
             </div>
           </div>
-          <div>
-            <img
-              class="hero-image"
-              src=${HERO_IMAGE}
-              alt="Golden justice scales on a legal desk"
-              loading="eager"
-              width="940"
-              height="650"
-            />
-          </div>
         </div>
       </section>
 
-      <!-- Firm Introduction -->
-      <section class="intro">
-        <div class="intro-inner">
-          <div>
-            <img
-              class="intro-image"
-              src=${ABOUT_IMAGE}
-              alt="Legal professional at a desk with law books"
-              loading="lazy"
-              width="940"
-              height="650"
-            />
-          </div>
-          <div class="intro-content">
-            <section-heading
-              eyebrow="About the Firm"
-              heading="Professional legal services, client-focused approach"
-              .subtitle=${''}
-              align="left"
-            ></section-heading>
-            <p>
-              Mukele Moni Law is a Kenyan law firm serving clients in Nairobi, Kakamega, and
-              beyond. We are committed to providing clear, practical legal advice and
-              diligent representation across a range of practice areas.
-            </p>
-            <p>
-              Our approach is grounded in understanding each client's unique circumstances and
-              delivering tailored legal solutions. We prioritise communication, transparency,
-              and attention to detail in every matter we handle.
-            </p>
-            <div class="intro-locations">
-              ${firmInfo.offices.map(
-                (office) => html`
-                  <div class="location-item">
-                    ${renderIcon('map-pin', 18)}
-                    <span>${office.city}</span>
-                  </div>
-                `,
-              )}
-            </div>
-          </div>
+      <!-- MMCA Intro Section -->
+      <section class="mmca-intro">
+        <div class="mmca-inner">
+          <span class="eyebrow">About the Firm</span>
+          <h2>Mukele Moni &amp; Company Advocates</h2>
+          <p>
+            Mukele Moni and Company Advocates is a premier law firm headquartered in Nairobi,
+            Kenya, proudly serving clients since 2006. Over the years, we have grown into one
+            of the nation's most respected legal practices—recognized for our ability to
+            deliver tailored, practical, and effective legal solutions that inspire confidence
+            and drive real results.
+          </p>
+          <p>
+            Built on a foundation of excellence, integrity, and true client-focused service,
+            our firm brings together a team of 22 highly skilled and dynamic professionals.
+            With diverse legal backgrounds and a unified dedication to exceptional
+            representation, we continue to set the standard for legal service delivery in
+            Kenya. Our client base is as diverse as our expertise—ranging from individuals and
+            start-ups to multinational corporations, government institutions, and
+            non-governmental organizations. Whether local or international, every client
+            receives the same unwavering commitment to quality, clarity, and strategic legal
+            guidance.
+          </p>
+          <p>
+            At Mukele Moni and Company Advocates, we understand that every client is unique.
+            This is why we craft personalized legal strategies that align with each client's
+            goals and expectations. Our approach combines deep industry insight, cutting-edge
+            research tools, and a collaborative internal culture—ensuring solutions that are
+            not only effective but truly transformative.
+          </p>
+          <a
+            class="read-more-btn"
+            href="/about"
+            @click=${(e: Event) => this.go(e, '/about')}
+          >
+            Read more ${renderIcon('arrow-right', 18)}
+          </a>
         </div>
       </section>
 
@@ -518,7 +555,7 @@ export class HomePage extends LitElement {
         </div>
       </section>
 
-      <!-- Why Choose -->
+      <!-- Why Choose — four key strengths -->
       <section class="why-section">
         <div style="padding: 0 var(--container-padding)">
           <section-heading
@@ -529,27 +566,36 @@ export class HomePage extends LitElement {
         </div>
         <div class="why-grid">
           <div class="why-card">
-            <div class="why-icon">${renderIcon('shield', 28)}</div>
-            <h3>Diligent Representation</h3>
+            <div class="why-icon">${renderIcon('map-pin', 28)}</div>
+            <h3>National Reach</h3>
             <p>
-              We approach every matter with thorough preparation and attention to detail,
-              ensuring your interests are protected.
+              With headquarters in Nairobi and a fully integrated branch in Kakamega, we offer
+              seamless, accessible, and consistent legal support across Kenya's diverse
+              regions.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">${renderIcon('briefcase', 28)}</div>
+            <h3>Comprehensive Solutions</h3>
+            <p>
+              Our four specialist departments—Litigation, Conveyancing, Commercial, and
+              Intellectual Property—deliver expert representation across every area of law.
             </p>
           </div>
           <div class="why-card">
             <div class="why-icon">${renderIcon('users', 28)}</div>
-            <h3>Client-Focused Service</h3>
+            <h3>Strategic Representation</h3>
             <p>
-              We take the time to understand your needs and provide clear, practical advice
-              at every stage of your matter.
+              We understand that every client is unique. Our tailored legal strategies align
+              with your goals, blending experience, innovation, and dedication.
             </p>
           </div>
           <div class="why-card">
-            <div class="why-icon">${renderIcon('book-open', 28)}</div>
-            <h3>Legal Expertise</h3>
+            <div class="why-icon">${renderIcon('shield', 28)}</div>
+            <h3>Trusted Expertise</h3>
             <p>
-              Our team is knowledgeable across multiple practice areas, providing
-              comprehensive legal support to individuals and businesses.
+              From individuals to multinational organizations, we provide personalized
+              strategies rooted in deep industry knowledge and modern legal research.
             </p>
           </div>
         </div>
